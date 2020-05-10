@@ -2,7 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { NavBar } from '../components'
-import { MoviesList, MoviesInsert, MoviesUpdate } from '../pages'
+import TradesList from '../pages/TradesList.jsx'
+import TradesInsert from '../pages/TradesInsert.jsx'
+import TradesUpdate from '../pages/TradesUpdate.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -11,12 +13,12 @@ function App() {
         <Router>
             <NavBar />
             <Switch>
-                <Route path="/movies/list" exact component={MoviesList} />
-                <Route path="/movies/create" exact component={MoviesInsert} />
+                <Route path="/trades/list" exact component={TradesList} />
+                <Route path="/trades/create" exact component={TradesInsert} />
                 <Route
-                    path="/movies/update/:id"
+                    path="/trades/update/:id"
                     exact
-                    component={MoviesUpdate}
+                    component={TradesUpdate}
                 />
             </Switch>
         </Router>

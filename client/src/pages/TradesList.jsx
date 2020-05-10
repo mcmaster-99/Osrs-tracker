@@ -10,21 +10,21 @@ const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `
 
-const Update = styled.div`
-    color: #ef9b0f;
-    cursor: pointer;
-`
+const Update = styled.div({
+    color: 'green',
+    cursor: 'pointer'
+})
 
 const Delete = styled.div`
     color: #ff0000;
     cursor: pointer;
 `
 
-class UpdateMovie extends Component {
+class UpdateTrade extends Component {
     updateUser = event => {
         event.preventDefault()
 
-        window.location.href = `/movies/update/${this.props.id}`
+        window.location.href = `/trades/update/${this.props.id}`
     }
 
     render() {
@@ -32,16 +32,16 @@ class UpdateMovie extends Component {
     }
 }
 
-class DeleteMovie extends Component {
+class DeleteTrade extends Component {
     deleteUser = event => {
         event.preventDefault()
 
         if (
             window.confirm(
-                `Do tou want to delete the movie ${this.props.id} permanently?`,
+                `Do you want to delete the trade ${this.props.id} permanently?`,
             )
         ) {
-            api.deleteMovieById(this.props.id)
+            api.deleteTradeById(this.props.id)
             window.location.reload()
         }
     }
@@ -51,11 +51,11 @@ class DeleteMovie extends Component {
     }
 }
 
-class MoviesList extends Component {
+class TradesList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            movies: [],
+            trades: [],
             columns: [],
             isLoading: false,
         }
@@ -64,37 +64,37 @@ class MoviesList extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true })
 
-        await api.getAllMovies().then(movies => {
+        await api.getAllTrades().then(trades => {
             this.setState({
-                movies: movies.data.data,
+                trades: trades.data.data,
                 isLoading: false,
             })
         })
     }
 
     render() {
-        const { movies, isLoading } = this.state
+        const { trades, isLoading } = this.state
 
         const columns = [
             {
-                Header: 'ID',
-                accessor: '_id',
-                filterable: true,
+                Header: 'Item',
+                accessor: 'item'
             },
             {
-                Header: 'Name',
-                accessor: 'name',
-                filterable: true,
+                Header: 'Quantity',
+                accessor: 'quantity'
             },
             {
-                Header: 'Rating',
-                accessor: 'rating',
-                filterable: true,
+                Header: 'Buy price',
+                accessor: 'buy_price'
             },
             {
-                Header: 'Time',
-                accessor: 'time',
-                Cell: props => <span>{props.value.join(' / ')}</span>,
+                Header: 'Sell price',
+                accessor: 'sell_price'
+            },
+            {
+                Header: 'Profit',
+                accessor: 'profit'
             },
             {
                 Header: '',
@@ -102,7 +102,7 @@ class MoviesList extends Component {
                 Cell: function(props) {
                     return (
                         <span>
-                            <DeleteMovie id={props.original._id} />
+                            <UpdateTrade id={props.original._id} />
                         </span>
                     )
                 },
@@ -113,15 +113,15 @@ class MoviesList extends Component {
                 Cell: function(props) {
                     return (
                         <span>
-                            <UpdateMovie id={props.original._id} />
+                            <DeleteTrade id={props.original._id} />
                         </span>
                     )
                 },
-            },
+            }
         ]
 
         let showTable = true
-        if (!movies.length) {
+        if (!trades.length) {
             showTable = false
         }
 
@@ -129,7 +129,7 @@ class MoviesList extends Component {
             <Wrapper>
                 {showTable && (
                     <ReactTable
-                        data={movies}
+                        data={trades}
                         columns={columns}
                         loading={isLoading}
                         defaultPageSize={10}
@@ -142,4 +142,4 @@ class MoviesList extends Component {
     }
 }
 
-export default MoviesList
+export default TradesList

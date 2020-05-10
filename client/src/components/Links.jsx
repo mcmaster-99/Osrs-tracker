@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Collapse = styled.div.attrs({
-    className: 'collpase navbar-collapse',
+    className: 'collpase',
 })``
 
 const List = styled.div.attrs({
-    className: 'navbar-nav mr-auto',
+    className: 'navbar-nav',
 })``
 
 const Item = styled.div.attrs({
@@ -18,19 +18,19 @@ class Links extends Component {
     render() {
         return (
             <React.Fragment>
-                <Link to="/" className="navbar-brand">
-                    My first MERN Application
+                <Link to="/" className="navbar">
+                    Profit Tracker
                 </Link>
                 <Collapse>
                     <List>
                         <Item>
-                            <Link to="/movies/list" className="nav-link">
-                                List Movies
+                            <Link to="/trades/list" className="nav-link">
+                                List Trades
                             </Link>
                         </Item>
                         <Item>
-                            <Link to="/movies/create" className="nav-link">
-                                Create Movie
+                            <Link to="/trades/create" className="nav-link">
+                                Add Trade
                             </Link>
                         </Item>
                     </List>

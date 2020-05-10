@@ -1,30 +1,31 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+/*import styled from 'styled-components'*/
+import Navbar from 'react-bootstrap/Navbar'
 
-import Logo from './Logo'
 import Links from './Links'
 
-const Container = styled.div.attrs({
+const navStyle = {
+    'backgroundColor': 'black',
+    'margin': '100px'
+};
+
+/*const Container = styled.div.attrs({
     className: 'container',
 })`
-    height: 150px;
 `
-
 const Nav = styled.nav.attrs({
-    className: 'navbar navbar-expand-lg navbar-dark bg-dark',
+    className: 'navbar navbar-dark',
 })`
-    margin-bottom: 20 px;
-`
+    width: 100%;
+    background-color: black;
+`*/
 
 class NavBar extends Component {
     render() {
         return (
-            <Container>
-                <Nav>
-                    <Logo />
-                    <Links />
-                </Nav>
-            </Container>
+            <Navbar style={{navStyle}}>
+                <Links />
+            </Navbar>
         )
     }
 }
